@@ -3,15 +3,3 @@ Content-Type: application/x-www-form-urlencoded
 
 grant_type=authorization_code&code={{code}}&client_id=client&client_secret=secret&redirect_uri=https://oidcdebugger.com/debug
 
-
-###
-
-GET http://localhost:8080/oauth2/jwks
-Accept: application/json
-
-###
-POST http://localhost:8080/login
-Content-Type: application/x-www-form-urlencoded
-host: localhost:8080
-
-username=chandlersong&password=toto00&_csrf=7e469555-1be6-4721-ae74-c1a073782084
