@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: "authorization-server"
+
+logging:
+  level:
+    org:
+      springframework:
+        security: debug
