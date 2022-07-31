@@ -56,18 +56,12 @@ public class SecurityConfig {
     @Bean
     public RegisteredClientRepository registeredClientRepository() {
         RegisteredClient registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
-                                                            .clientId("client")
-                                                            .clientSecret("{noop}secret")
-                                                            .authorizationGrantType(AuthorizationGrantType.PASSWORD)
-                                                            .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-                                                            .redirectUri(
-                                                                    "http://127.0.0.1:8080/login/oauth2/code/messaging-client-oidc")
-                                                            .redirectUri("http://127.0.0.1:8080/authorized")
-                                                            .scope("all")
-                                                            .clientSettings(ClientSettings.builder()
-                                                                                          .requireAuthorizationConsent(
-                                                                                                  true)
-                                                                                          .build())
+                                                            .clientId("client" )
+                                                            .clientSecret("{noop}secret" )
+                                                            .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
+                                                            .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                                                            .redirectUri("https://oidcdebugger.com/debug" )
+                                                            .scope(OidcScopes.OPENID)
                                                             .build();
 
         return new InMemoryRegisteredClientRepository(registeredClient);
