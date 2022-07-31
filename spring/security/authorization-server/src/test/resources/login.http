@@ -1,0 +1,21 @@
+POST http://localhost:8080/oauth2/token
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic Y2xpZW50OnNlY3JldA==
+
+username=user&password=password&grant_type=password&&scope=all
+
+
+###
+
+GET http://localhost:8080/oauth2/jwks
+Accept: application/json
+
+###
+POST http://localhost:8080/login
+Content-Type: application/x-www-form-urlencoded
+host: localhost:8080
+
+username=chandlersong&password=toto00&_csrf=7e469555-1be6-4721-ae74-c1a073782084
+
+###
+GET http://localhost:8080/oauth2/authorize?response_type=code&client_id=oauthclient2&scope=read

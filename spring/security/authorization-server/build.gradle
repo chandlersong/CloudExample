@@ -1,0 +1,25 @@
+plugins {
+    id 'com.google.cloud.tools.jib'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
+    implementation "org.springframework.boot:spring-boot-starter-security"
+    implementation "org.springframework.security:spring-security-oauth2-jose"
+    implementation "org.springframework.security:spring-security-oauth2-core"
+    implementation "org.springframework.security:spring-security-oauth2-authorization-server:0.3.1"
+}
+
+jib {
+    container {
+        mainClass = 'me.chandlersong.jwt.JwtApplication'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
