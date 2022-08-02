@@ -56,6 +56,7 @@ subprojects {
 
     dependencies {
         compileOnly "org.projectlombok:lombok:${lombokVersion}"
+        compileOnly "com.google.guava:guava:31.1-jre"
         annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
         testCompileOnly "org.projectlombok:lombok:${lombokVersion}"

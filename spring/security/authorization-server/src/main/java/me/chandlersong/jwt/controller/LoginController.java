@@ -13,4 +13,11 @@ public class LoginController {
         return "mylogin";
     }
 
+
+    @GetMapping("/" )
+    String hello(Model model) {
+
+        return "helloworld";
+    }
+
 }
