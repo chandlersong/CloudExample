@@ -8,3 +8,7 @@ rootProject.name = 'spring'
 include 'security'
 include 'security:authorization-server'
 findProject(':security:authorization-server')?.name = 'authorization-server'
+include 'services'
+include 'services:helloworld'
+findProject(':services:helloworld')?.name = 'helloworld'
+
