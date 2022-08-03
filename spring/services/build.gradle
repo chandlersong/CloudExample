@@ -1,0 +1,6 @@
+group 'me.chandlersong'
+version '1.0-SNAPSHOT'
+
+
+jar.enabled = false
+
