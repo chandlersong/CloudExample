@@ -1,11 +1,9 @@
-group 'me.chandlersong'
-version '1.0-SNAPSHOT'
-
-
 configure(allprojects) {
     ext {
         sourceCompatibility = '8'
     }
+    group 'me.chandlersong'
+    version '1.0-SNAPSHOT'
 }
 
 
