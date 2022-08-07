@@ -1,0 +1,15 @@
+plugins {
+    id "com.google.cloud.tools.jib"
+}
+
+jib {
+    from {
+        image = 'hub-mirror.c.163.com://openjdk:8-jdk-slim-buster'
+    }
+    to {
+        image = "chandlersong/${project.name}:${version}"
+    }
+}
+
+
+

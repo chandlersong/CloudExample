@@ -1,85 +1,11 @@
-buildscript {
-    ext {
-        springBootVersion = '2.7.2'
-    }
-    repositories {
-        maven { url "https://maven.aliyun.com/nexus/content/groups/public/" }
-    }
-
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
-    }
-}
-
-plugins {
-    id 'groovy'
-}
-
 group 'me.chandlersong'
 version '1.0-SNAPSHOT'
 
 
-jar.enabled = false
-
 configure(allprojects) {
     ext {
         sourceCompatibility = '8'
-        lombokVersion = '1.18.24'
-    }
-
-
-    apply plugin: "java"
-    apply plugin: "org.springframework.boot"
-    apply plugin: "io.spring.dependency-management"
-    dependencyManagement {
-        imports {
-            mavenBom "org.springframework.boot:spring-boot-starter-parent:${springBootVersion}"
-        }
-    }
-
-    repositories {
-        mavenLocal()
-        maven { url "https://maven.aliyun.com/nexus/content/groups/public/" }
-        maven { url 'https://repo.spring.io/plugins-release' }
-        maven { url "https://repo.spring.io/milestone" }
-        maven { url "https://repo.spring.io/milestone" }
-        maven { url "https://repo.spring.io/release" }
-        mavenCentral()
-    }
-
-}
-
-
-subprojects {
-    apply plugin: 'java'
-
-
-    dependencies {
-        compileOnly "org.projectlombok:lombok:${lombokVersion}"
-        compileOnly "com.google.guava:guava:31.1-jre"
-        annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-
-        testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
-        testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-    }
-
-
-    project.afterEvaluate {
-        if (it.plugins.hasPlugin('com.google.cloud.tools.jib')) {
-            jib {
-                from {
-                    image = 'hub-mirror.c.163.com://openjdk:8-jdk-slim-buster'
-                }
-                to {
-                    image = "chandlersong/${project.name}:${version}"
-                }
-            }
-            build.finalizedBy(jibDockerBuild)
-        }
     }
 }
 
 
-test {
-    useJUnitPlatform()
-}

@@ -19,7 +19,6 @@ GET http://localhost:8081/hello?name=chandler
 Authorization: Bearer {{access_token}}
 
 > {%
-client.global.set("access_token", response.body.access_token);
 client.test("Request executed successfully", function() {
   client.assert(response.status === 200, "Response status is not 200");
   client.assert(response.body.name === "hello chandler", "Response status is not 200");
