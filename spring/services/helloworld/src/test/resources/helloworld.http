@@ -1,5 +1,5 @@
 ### Login
-POST http://localhost:8080/login/password
+POST http://{{authHost}}/login/password
 Content-Type: application/json
 
 {
@@ -15,7 +15,7 @@ client.test("Request executed successfully", function() {
 %}
 
 ### Hello
-GET http://localhost:8081/hello?name=chandler
+GET http://{{helloHost}}/hello?name=chandler
 Authorization: Bearer {{access_token}}
 
 > {%

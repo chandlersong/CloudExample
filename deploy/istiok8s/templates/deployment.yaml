@@ -1,0 +1,67 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: hello-world-destination-rule
+spec:
+  host: hello-world-deployment-cs
+  subsets:
+  - name: base
+    labels:
+      {{- include "istiok8s.selectorLabels" . | nindent 6}}
+      app: "helloWorld"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world-deployment-cs
+  labels:
+    {{- include "istiok8s.labels" . | nindent 4 }}
+    app: "helloWorld"
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: 8081
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "istiok8s.selectorLabels" . | nindent 4 }}
+    app: "helloWorld"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-deployment
+  labels:
+    {{- include "istiok8s.labels" . | nindent 4 }}
+    app: "helloWorld"
+spec:
+{{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+{{- end }}
+  selector:
+    matchLabels:
+      {{- include "istiok8s.selectorLabels" . | nindent 6 }}
+      app: "helloWorld"
+  template:
+    metadata:
+    {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      labels:
+        {{- include "istiok8s.selectorLabels" . | nindent 8 }}
+        app: "helloWorld"
+    spec:
+      containers:
+        - name: hello-world-pod
+          image: {{.Values.image.service.hellworld}}:{{.Values.image.tag}}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8081
+          env:
+            - name: spring_profiles_active
+              value: mesh
+
+
